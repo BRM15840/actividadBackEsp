@@ -39,9 +39,10 @@ public class Producto {
 	private String productoDescripcion;
 	
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_categoria")
 	@ApiModelProperty(value="Categoria del producto")
+	@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 	private Categoria categoria;
 	
 	/*Campos de control*/

@@ -26,7 +26,7 @@ import com.acti.dao.Producto;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ControllerTest {
 	
-	private final Long id = 31L;
+	private final Long id = 2L;
 	
 	@Autowired 
 	private ProductosController prodController;

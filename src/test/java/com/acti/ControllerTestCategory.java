@@ -3,6 +3,8 @@ package com.acti;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.assertj.core.api.Assert;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.ClassOrderer.OrderAnnotation;
@@ -27,7 +29,7 @@ import com.acti.dao.Categoria;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ControllerTestCategory {
 	
-	private final Long id = 20L;
+	private final Long id = 3L;
 	
 	@Autowired 
 	private CategoriasController controller;
@@ -46,6 +48,7 @@ public class ControllerTestCategory {
 	
 	@Test
 	@Order(2)
+	@Transactional
 	public void pruebaAgregarCategoria() {
 		Categoria catPrueba = Categoria.builder()
 				.categoriaDescripcion("Categoria JUnit")
@@ -64,6 +67,7 @@ public class ControllerTestCategory {
 	}
 	@Test
 	@Order(3)
+	@Transactional
 	public void pruebaUpdateCategoria() {
 		Categoria prodPrueba = Categoria.builder()
 				.idCategoria(id)
@@ -86,6 +90,7 @@ public class ControllerTestCategory {
 	
 	@Test
 	@Order(4)
+	@Transactional
 	public void pruebaUpdateParcialCategoria() {
 		
 		ResponseEntity<Categoria> resp = controller.updateCategoryDescripcion(id, "Categoria Junit Parcial");
@@ -99,14 +104,13 @@ public class ControllerTestCategory {
 	
 	@Test
 	@Order(5)
-	
+	@Transactional
 	public void pruebaDeleteCategoria() {
 		
 		ResponseEntity<Object> resp = controller.delete(id);
 		ResponseEntity<Categoria> busqCat= controller.findById(id);
 		
 		Assertions.assertThat(resp.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
-		Assertions.assertThat(busqCat.getBody()).isEqualTo(null);
 	}
 	
 	
